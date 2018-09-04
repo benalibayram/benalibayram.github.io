@@ -58,6 +58,8 @@
 						<div class="inner">
 							<h1 class="major">Circos: Fonksiyonel bağlantısallık</h1>
 							<p>Eylül 2018</p>
+							<p>Circos, aslında genom araştırmacılarının görselleştirme ihtiyaçları üzerine doğmuş bir araç. Fonksiyonel MRG'de biz farklı beyin bölgeleri arasındaki bağlantısallıkları hesaplıyoruz ve bulgularımızı görselleştirecek farklı yazılımlar kullanıyoruz. Fakat bağlantısallığını hesapladığınız bölge adedi arttıkça hem görselleştirmesi hem de listelemesi zorlaşıyor. Bu noktada bence Circos güzel bir çözüm.</p>
+							<hr />
 							<span class="image fit"><img src="images/circos.png" alt="" /></span>
 							<h2>Circos kurulumu:</h2>
 							<p>Kurulum için <a href="http://circos.ca/software/">Circos</a> sitesini takip ettim.</p>
@@ -68,10 +70,14 @@
 ...
 cpan> install Text::Format</code></pre></p>
 						<p>Example klasöründe PowerShell çalıştırıp <pre><code>D:\StrawberryCircos\circos-0.69-5\example> perl D:\StrawberryCircos\circos-0.69-5\bin\circos -conf etc\circos.conf</code></pre> yazınca örneği üretti. Yani kurulum tamam.</p>
-						<h2>Circos'ta Connectogram Hazırlamak:</h2>
+						<hr />
+				<h2>Circos'ta Connectogram Hazırlamak:</h2>
 						<p>Circos'ta genetik terimler kullanıldığı için beyin bağlantısallığındaki karşılıkları: <strong>kromozom</strong>'un <strong>beyin lobları</strong>, <strong>band</strong>'ın <strong>beyin bölgeleri</strong> olacaktır. Hazırladığımız data dosyasına karyotype denilecektir.</p>
 						<p><strong>Kromozom Formatı</strong> chr – ID Label(grafikte görünmesini isteğiniz isim) başlangıç bitiş(kromozomun boyutunu belirlemek için) renk</p>
 						<p><strong>Örnek</strong> <code>chr - fro_l FRONTAL 0 212302 white</code> frontal lobda 212302 vokselimin olduğunu ve grafikte bu bölgenin FRONTAL olarak görünmesini istediğimi belirtmiş oluyorum. Renklerle alakalı yardım için de etc/color.conf belgesine bakabilirsiniz.</p>
+						<hr />
+				<ul class="feature-icons"><li class="fa-code">A full</li></ul>
+				<span class="icon major fa-code">A Full</span>A full
 						</div>
 					</section>
 
