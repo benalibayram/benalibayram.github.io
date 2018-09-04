@@ -62,12 +62,12 @@
 							<h4>Circos kurulumu:</h4>
 							<p>Kurulum için <a href="http://circos.ca/software/">Circos</a> sitesini takip ettim.</p>
 							<p>Öncelikle Strawberry Perl kurulumunu yaptım. Perl kurulduktan sonra <a href="http://circos.ca/software/download/">circos-0.69-5.tgz</a>'yi indirip açtım. Bendeki konumu D:\StrawberryCircos\.</p>
-							<p>Circos'un eksik modülleri için <code>perl D:\StrawberryCircos\circos-0.69-5\bin\circos -modules</code> komutunu çalıştırdım. Eksik modüller listelendi. Yüklemel için ise <code>D:\Strawberry\perl\bin\cpan</code> çalıştırdım. Açılan cmd ekranından sırasıyla eksik modülleri aşağıdaki gibi yükledim.
+							<p>Circos'un eksik modülleri için
+							<pre><code>perl D:\StrawberryCircos\circos-0.69-5\bin\circos -modules</code></pre> komutunu çalıştırdım. Eksik modüller listelendi. Yüklemel için ise <pre><code>D:\Strawberry\perl\bin\cpan</code></pre> çalıştırdım. Açılan cmd ekranından sırasıyla eksik modülleri aşağıdaki gibi yükledim.
 							<pre><code>cpan> install Config::General
-							...
-							cpan> install Text::Format
-							</code></pre></p>
-						<p>Example klasöründe PowerShell çalıştırıp <code>D:\StrawberryCircos\circos-0.69-5\example> perl D:\StrawberryCircos\circos-0.69-5\bin\circos -conf etc\circos.conf</code> yazınca örneği üretti. Yani kurulum tamam.</p>
+...
+cpan> install Text::Format</code></pre></p>
+						<p>Example klasöründe PowerShell çalıştırıp <pre><code>D:\StrawberryCircos\circos-0.69-5\example> perl D:\StrawberryCircos\circos-0.69-5\bin\circos -conf etc\circos.conf</code></pre> yazınca örneği üretti. Yani kurulum tamam.</p>
 						<h4>Circos'ta Connectogram Hazırlamak:</h4>
 						<p>Circos'ta genetik terimler kullanıldığı için beyin bağlantısallığındaki karşılıkları: <strong>kromozom</strong>'un <strong>beyin lobları</strong>, <strong>band</strong>'ın <strong>beyin bölgeleri</strong> olacaktır. Hazırladığımız data dosyasına karyotype denilecektir.</p>
 						<p>Uygun format = chr – ID Label(grafikte görünmesini isteğiniz isim) başlangıç bitiş(kromozomun boyutunu belirlemek için) renk</p>
