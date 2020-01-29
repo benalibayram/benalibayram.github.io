@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Freesurfer: Yüzey-temelli Beynin Yapısal Verileri ile Grup Analizi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/academicons.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10261519-3"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-10261519-3');
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<header>
+						<h4>Ali BAYRAM, PhD</h4>
+						<p>ASDETAE Sinirbilim, <br />HUBAL, <br />İstanbul Üniversitesi</p>
+					</header>
+					<nav>
+						<ul>
+							<li><a href="index.html#intro">Merhaba</a></li>
+							<li><a href="index.html#one" class="active">Nasıl Yapılır</a></li>
+							<!-- <li><a href="index.html#two">Neler yapıyorum</a></li> -->
+							<!-- <li><a href="#three">İletişim</a></li> -->
+						</ul>
+					</nav>
+					<footer>
+						<ul class="icons">
+							<li><a href="https://github.com/benalibayram" class="fa fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:benalibayram@gmail.com" class="fa fa-envelope"><span class="label">Email</span></a></li>
+							<li><a href="https://scholar.google.com/citations?user=0f0nIWQAAAAJ" style="border:none" class="ai ai-google-scholar ai-1x" target="_blank"></a></li>
+							<li><a href="https://www.researchgate.net/profile/Ali_Bayram4" style="border:none" class="ai ai-researchgate ai-1x" target="_blank"></a></li>
+						</ul>
+					</footer>	
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Freesurfer: Yüzey-temelli Korteks Kalınlığı Grup Analizi</h1>
+							<p>Temmuz 2019</p>
+							<p>Freesurfer, yüksek çözünürlüklü yapısal kranyal MR görüntülerini parsel ve segmentlere ayırmakta kullanılan bir yazılım. Freesurfer analizi sonucunda parsellenmiş beyin yüzeyi ve segmentlenmiş beyin hacmi elde edilmekte. Analiz sırasında voksellerden oluşan MR görüntülerinin verteksleri içeren yüzey örgüsü de çıkarılmış oluyor. Yüzey örgüsü çok küçük üçgenlerle oluşturuluyor ve verteksler bu üçgenlerin köşeleri. Yüzey örgüsü gri madde yüzeyini (pial surface) temsil ediyor ve beyaz madde yüzeyi'ne (white matter surface) uzaklığı korteks kalınlığını ifade ediyor. Her verteks için bir kalınlık bilgisi de mevcut. Bu bilgiler ışığında beyindeki farklı anatomik bölgelere ait korteks kalınlığı bilgisini elde etmek mümkün. Burada, korteks kalınlığı hesaplamaları için grup analizinin nasıl yapıldığını bulacaksınız. İzleyeceğiniz yolu tarif eden <strong>kaynaklar mevcut</strong>. <a href="http://surfer.nmr.mgh.harvard.edu/pub/docs/GLM.pptx" target="_blank">İndir: Grup analizi</a> veya Freesurfer'ın tutorials sayfasından <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/GroupAnalysisV6.0" target="_blank">Grup Analizi kaynağı</a>. Gene Freesurfer tutorial sayfasından <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/MultipleComparisonsV6.0Perm" target="_blank">Çoklu karşılaştırma kaynağı</a>.</p>
+							<hr />
+							<img src="images/yuzey2.png" width="50%" align="left" />
+							<img src="images/Segment_Parsel2.png" width="50%" align="right" />
+							<hr width="100%" size="5" noshade>
+							<h2>Korteks kalınlığı grup analizi aşamaları:</h2>
+							<p>Öncelikle tabiki Freesurfer analizinin tamamlanmış olması gerekli. Bu arada recon-all komutunu -qcache opsiyonu ile çalıştırmadığınızı varsayıyorum.</p>
+							<p>Yapacağımız grup analizi için denek listesi, ait oldukları gruplar ve varsa kovaryatların tanımlanması gerekli. Bunun için bir text editörü kullanarak (<a href="https://atom.io/" target="_blank">Atom</a> öneririm) <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsgdFormat" target="_blank">fsgd</a> isimli bir formatta bu bilgileri basit bir text dosyası olarak kaydediyoruz.</p>
+							<p>Örnek <strong>fsgd</strong> formatlı bilgileri aşağıda yazıyorum: <pre><code>GroupDescriptorFile 1
+Title HastaKontrolYasIQ
+Class HastalarMD
+Class Kontroller
+Variables             Yas  IQ
+Input HastaZB01 HastalarMD   10    1000
+Input HastaAB02 HastalarMD   20    2000
+Input HastaAK01 HastalarMD   30    1000
+Input KontrTA01 Kontroller   40    2000
+Input KontrCE02 Kontroller   50    2000
+#Input Iptal01 Kontroller   60    2000</code></pre> bu örnekteki gibi kendi bilgilerinizi hazırlayıp herhangi bir isim ve .fsgd uzantısıyla text şeklinde kaydedebilirsiniz (Ben HastaKontrolYasIQ.fsgd olarak kaydediyorum). Bu arada # (diyez) olan satır işleme katılmaz. Class aslında Grup'dur, Input'lar ise denekler. Input'dan sonra gelen denek ismi ise Freesurfer subjid. Eğer kovaryatınız yoksa Variables ile başlayan satırı ve değerlerini siliyorsunuz. Bence bu dosyayı direk Excel'den kopyala-yapıştır yapıp kolayca hazırlayabilirsiniz.</p>
+							<h3>Kalınlık dosyalarının Birleştirilmesi:</h3>
+							<p>Şimdi mris_preproc komutu ile grup istatistiği yapacağımız denek verilerini <strong>tek dosyada birleştiriyoruz</strong>.
+							<pre><code>mris_preproc \
+	--fsgd HastaKontrolYasIQ.fsgd \
+	--hemi lh \
+	--meas thickness \
+	--target fsaverage \
+	--o lh.HastaKontrolYasIQ.thickness.mgh
+mris_preproc \
+	--fsgd HastaKontrolYasIQ.fsgd \
+	--hemi rh \
+	--meas thickness \
+	--target fsaverage \
+	--o rh.HastaKontrolYasIQ.thickness.mgh</code></pre>
+							bu iki komutda satır sonlarındaki "\" komuta alt satırdan devam edildiğini gösteriyor ve komutu okuması kolay olsun diye kullanıldı. İsterseniz kaldırarak tek satır yazabilirsiniz. HastaKontrolYasIQ.fsgd yukarıda bahsedilen <strong>fsgd</strong> formatıondaki dosya. <strong>--hemi</strong> değişkeni "lh" seçilmiş ve "rh" seçerek de analiz tekrarlanmış. <strong>--meas thickness</strong> ile korteks kalınlıklarını birleştiriyoruz. Tüm denekler <strong>--target</strong> değişkeni ile verilen fsaverage şablonuna küre temelli çakıştırma ile taşınacak ki zaten bu özellik için yüzey analizi yapıyoruz. Alternatif için --surfreg değişkenini inceleyebilirsiniz. Anlaşılacağı üzere <strong>--o</strong> sonrası sonucun yazılacağı dosyayı veriyoruz.</p>
+							<h3>Yüzeysel Yumuşatma:</h3>
+							<p>Sırada <strong>yumuşatma</strong> (smoothing) var:<pre><code>mri_surf2surf \
+	--hemi lh \
+	--s fsaverage \
+	--sval lh.HastaKontrolYasIQ.thickness.mgh \
+	--fwhm 20 \
+	--cortex \
+	--tval lh.HastaKontrolYasIQ.thickness.20.mgh
+mri_surf2surf \
+	--hemi rh \
+	--s fsaverage \
+	--sval rh.HastaKontrolYasIQ.thickness.mgh \
+	--fwhm 20 \
+	--cortex \
+	--tval rh.HastaKontrolYasIQ.thickness.20.mgh</code></pre> 
+							Bu komuttaki <strong>--fwhm 20</strong> 20mm lik yüzeyde yumuşatma işlemi için yazıldı. Yüzey analizinin en önemli avantajlarından, çünkü çok ilgisiz anatomik bölgelere ait değerlerin hacimsel yumuşatmada olduğu gibi karışmasını engelliyor. <strong>--cortex</strong> medyal duvarda değil sadece korteks yüzeyinde yumuşatma yapılması için eklendi.</p>
+							<hr width="100%" size="5" noshade>
+							<h2>GLM analizi (mri_glmfit):</h2>
+							<p><pre><code>mri_glmfit \
+	--y lh.HastaKontrolYasIQ.thickness.20.mgh \
+	--fsgd HastaKontrolYasIQ.fsgd dods \
+	--C grup.fark.mtx \
+	--C grupXyas.mtx \
+	--C grupXiq.mtx \
+	--C grupXyasXiq.mtx \
+	--C Hepsi.yas.mtx \
+	--surf fsaverage lh \
+	--cortex \
+	--glmdir lh.HastaKontrolYasIQ.glmdir \
+	--eres-save
+mri_glmfit \
+	--y rh.HastaKontrolYasIQ.thickness.20.mgh \
+	--fsgd HastaKontrolYasIQ.fsgd dods \
+	--C grup.fark.mtx \
+	--C grupXyas.mtx \
+	--C grupXiq.mtx \
+	--C grupXyasXiq.mtx \
+	--C Hepsi.yas.mtx \
+	--surf fsaverage rh \
+	--cortex \
+	--glmdir rh.HastaKontrolYasIQ.glmdir \
+	--eres-save</code></pre></p>
+							<h3>Tasarım Matrisi:</h3>
+							<p>Genel Lineer Model (GLM) analizinde, fsgd dosyasını (HastaKontrolYasIQ.fsgd) kullanarak Freesurfer bizim için tasarım matrisini oluşturacak. Bu aşamada Freesurfer tasarım matrisindeki grup bilgisi ve açıklayıcı değişkenler için bir tanımlama yapmamızı istiyor <strong>DODS ve DOSS modelleri</strong>. DODS: farklı ofset, farklı eğim. DOSS: farklı ofset, aynı eğim demek. Fsgd dosyasını kullanarak oluşturulacak tasarım matrisi DODS modelinde kurulduğunda her denek grubu için farklı lineer modeller tasarım matrisine eklenir, yani her grubun farklı ofset ve eğime sahip olacağı düşünülür. Yukarıdaki örnek üzerinden gidersek, hasta ve kontrollerin IQ değerini tasarım matrisinde iki farklı IQ sütununda tanımlayacak çünkü IQ'nun korteks kalınlığına etkisinin hasta ve kontrol için farklı bir temel seviyeden başlayıp farklı bir trent ile değiştiğini varsayıyor. DOSS seçtiğimizde ise IQ değerlerini tasarım matrisinde tek sütunda tanımlanıyor. Nasıl seçim yapılacağı hipotezimize kalmış. Fakat bizim örnekten gidsersek, Grup ve IQ interaksiyonuna bakacaksak kesin DODS kullanılmalı. Eğer bunlardan daha esnek bir tasarım matrisi kullanmak isterseniz --X ile kendi ürettiğinizi de verebilirsiniz.</p>
+							<p>Tasarım matrisinin <strong>DODS versiyonu</strong>: <strong>1.</strong>HastalarMD <strong>2.</strong>Kontroller <strong>3.</strong>HastalarMD_Yas <strong>4.</strong>Kontroller_Yas <strong>5.</strong>HastalarMD_IQ <strong>6.</strong>Kontroller_IQ<pre><code>+1.00000 +0.00000 +10.00000 +0.00000 +1000.00000 +0.00000
++1.00000 +0.00000 +20.00000 +0.00000 +2000.00000 +0.00000
++1.00000 +0.00000 +30.00000 +0.00000 +1000.00000 +0.00000
++0.00000 +1.00000 +0.00000 +40.00000 +0.00000 +2000.00000
++0.00000 +1.00000 +0.00000 +50.00000 +0.00000 +2000.00000</code></pre></p>
+							<p>Tasarım matrisinin <strong>DOSS versiyonu</strong>: <strong>1.</strong>HastalarMD <strong>2.</strong>Kontroller <strong>3.</strong>Yas <strong>4.</strong>IQ<pre><code>+1.00000 +0.00000 +10.00000 +1000.00000
++1.00000 +0.00000 +20.00000 +2000.00000
++1.00000 +0.00000 +30.00000 +1000.00000
++0.00000 +1.00000 +40.00000 +2000.00000
++0.00000 +1.00000 +50.00000 +2000.00000</code></pre></p>
+							
+							<h3>Kontrast Tanımlama:</h3>
+							<p>Yapacağımız karşılaştırmalar için gerekli <strong>kontrast vektörlerini</strong> tanımlayalım ve text olarak kaydedelim. Örnek olarak DODS ile devam ediyoruz. Elimizdeki tasarım matrisinin 6 açıklayıcı değişkeni olduğu için her kontrast dosyasında 6 değer giriyoruz. Tek satır girersek t-test sonucu verir. İki satır girersek F-test sonucu verir.</p>
+							<p>Gruplar arasında, Yaş ve IQ dışlandığında, korteks kalınlığında fark var mı? <strong>grup.fark.mtx</strong><pre><code>1 -1 0 0 0 0</code></pre></p>
+							<hr />
+							<p>Grup yaş ilişkisi; IQ dışlandığında, Grupların korteks kalınlıklarında Yaştan etkilenme açısından fark var mı? <strong>grupXyas.mtx</strong><pre><code>0 0 1 -1 0 0</code></pre></p>
+							<hr />
+							<p>Grup IQ ilişkisi; Yaş dışlandığında, Grupların korteks kalınlıklarında IQ'dan etkilenme açısından fark var mı? <strong>grupXiq.mtx</strong><pre><code>0 0 0 0 1 -1</code></pre></p>
+							<hr />
+							<p>Grup Yaş IQ ilişkisi; Grupların korteks kalınlıklarında IQ ve Yaş'dan etkilenme açısından fark var mı? <strong>grupXyasXiq.mtx</strong><pre><code>0 0 1 -1 0 0
+0 0 0 0 1 -1</code></pre></p>
+							<p>Yaş etkisi; Grup ve IQ dışlandığında, Tüm deneklerin korteks kalınlıkları Yaştan etkilenme açısından 0'dan farklı mı? <strong>Hepsi.yas.mtx</strong><pre><code>0 0 0.5 0.5 0 0</code></pre></p>
+							<h3>Sonuçların Gösterimi:</h3>
+							<p>Şimdi sonuçları görselleştiriyoruz: Sonuçların olduğu glm klasörünün ismini biz verdik, ayrıca glm klasöründe, her kontrast için kontrast dosyamızın adında bir altklasör de açıldı. Bu kontrast alt klasöründe istersek çoklu karşılaştırma düzeltmesi yapılmamış belirginlik (significance, -log10(pvalue)) haritası olan <strong>sig.mgz</strong> dosyasını kullanabiliriz. Arkaplanına ise <strong>fsaverage</strong> şablonunu koyuyoruz.<pre><code>freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.inflated:annot=aparc.annot:annot_outline=1:overlay=lh.HastaKontrolYasIQ.glmdir/grup.fark/sig.mgh:overlay_threshold=4,5 -viewport 3d -layout 1</code></pre></p>
+							<hr width="100%" size="5" noshade>
+							<h2>Permütasyon Kullanarak Küme Seviyesinde Çoklu Karşılaştırma Düzeltmesi (mri_glmfit-sim):</h2>
+							Önceki aşamada GLM çözülürken eklediğimiz son parametre olan <strong>--eres-save</strong>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Ali Bayram.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
