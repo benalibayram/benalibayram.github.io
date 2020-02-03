@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>GitHub kullanımı: GitHub repositorime nasıl erişiyorum!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/academicons.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10261519-3"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-10261519-3');
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<header>
+						<h4>Ali BAYRAM, PhD</h4>
+						<p>ASDETAE Sinirbilim, <br />HUBAL, <br />İstanbul Üniversitesi</p>
+					</header>
+					<nav>
+						<ul>
+							<li><a href="index.html#intro">Merhaba</a></li>
+							<li><a href="index.html#one" class="active">Nasıl Yapılır</a></li>
+							<!-- <li><a href="index.html#two">Neler yapıyorum</a></li> -->
+							<!-- <li><a href="#three">İletişim</a></li> -->
+						</ul>
+					</nav>
+					<footer>
+						<ul class="icons">
+							<li><a href="https://github.com/benalibayram" class="fa fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:benalibayram@gmail.com" class="fa fa-envelope"><span class="label">Email</span></a></li>
+							<li><a href="https://scholar.google.com/citations?user=0f0nIWQAAAAJ" style="border:none" class="ai ai-google-scholar ai-1x" target="_blank"></a></li>
+							<li><a href="https://www.researchgate.net/profile/Ali_Bayram4" style="border:none" class="ai ai-researchgate ai-1x" target="_blank"></a></li>
+						</ul>
+					</footer>	
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">GitHub kullanımı: GitHub repositorime nasıl erişiyorum!</h1>
+							<p>Şubat 2020</p>
+							<p>GitHub üyeliğinizin olduğunu ve Git kurmuş ve ayarlamış olduğunuzu (git config) farzederek devam edelim.</p>
+							<hr />
+							<img src="images/github.png" width="50%" align="center" />
+							<hr width="100%" size="5" noshade>
+							<p>GitHub sitenize gittiniz ve yeni repository açıp adını <strong>'kisisel'</strong> koydunuz diyelim. Repositorinin url'sini (https://github.com/***benim_github***/kisisel) kopyalayıp Git'e geliyoruz.
+							<pre><code>git init kisisel
+cd kisisel
+git remote add kisisel https://github.com/***benim_github***/kisisel
+git remote -v 
+git pull kisisel master --allow-unrelated-histories</code></pre> bu örnekteki gibi <strong>'kisisel'</strong> isimli (bookmark) bir uzak bağlantı ismi kullanıyorum, değişebilir. Değişiklik </p>
+							<p>Şimdi yaptığımız tüm değişikliklerin repositoride güncellenmesi için (eğer sadece belli dosyalardaki değişiklikleri güncelliyorsanız, nokta yerine dosya ismini yazmalısınız.):
+							<pre><code>git add .
+git commit -m 'herşeyi değiştirdim!'
+git push kisisel master %şifre ister</code></pre>
+							<img src="images/github2.png" width="30%" align="center" />
+							<hr />
+							bu arada yukarıdaki görselde değişikliklerin farklı kademelere hangi komutla geçirildiğini görüyorsunuz. Ayrıca <strong>status</strong> ve <strong>diff --staged</strong> pramidin farklı seviyelerindeki değişiklikleri görmeni sağlar. <strong>log</strong> commitlerini gösterir. <strong>git checkout -- dosyaadi</strong> çalışma aşamasındaki değişiklikleri geri alır. Burada <strong>branch</strong> tanımından hiç bahsetmedim. Asıl versiyon kontrolü bunlar üzerinden ilerliyor. Örneğin <strong>git branch yenidal</strong> dökümanlar üzerinde yeni bir versiyonda ilerlemenizi sağlar, hatta bunun sonuna master~3 ifadesi eklerseniz master'ın 3 öncesi için bir dallanma yapar. Eğer <strong>git checkout -b yenidal</strong> dersen artık tüm commit'ler yenidal üzerinden güncellenir. <strong>git checkout master</strong> master dalına dönmek için kullanılır.</p>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Ali Bayram.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

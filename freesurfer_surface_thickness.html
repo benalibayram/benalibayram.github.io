@@ -159,10 +159,12 @@ mri_glmfit \
 0 0 0 0 1 -1</code></pre></p>
 							<p>Yaş etkisi; Grup ve IQ dışlandığında, Tüm deneklerin korteks kalınlıkları Yaştan etkilenme açısından 0'dan farklı mı? <strong>Hepsi.yas.mtx</strong><pre><code>0 0 0.5 0.5 0 0</code></pre></p>
 							<h3>Sonuçların Gösterimi:</h3>
-							<p>Şimdi sonuçları görselleştiriyoruz: Sonuçların olduğu glm klasörünün ismini biz verdik, ayrıca glm klasöründe, her kontrast için kontrast dosyamızın adında bir altklasör de açıldı. Bu kontrast alt klasöründe istersek çoklu karşılaştırma düzeltmesi yapılmamış belirginlik (significance, -log10(pvalue)) haritası olan <strong>sig.mgz</strong> dosyasını kullanabiliriz. Arkaplanına ise <strong>fsaverage</strong> şablonunu koyuyoruz.<pre><code>freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.inflated:annot=aparc.annot:annot_outline=1:overlay=lh.HastaKontrolYasIQ.glmdir/grup.fark/sig.mgh:overlay_threshold=4,5 -viewport 3d -layout 1</code></pre></p>
+							<p>Şimdi sonuçları görselleştiriyoruz: Sonuçların olduğu glm klasörünün ismini biz verdik, ayrıca glm klasöründe, her kontrast için kontrast dosyamızın adında bir altklasör de açıldı. Bu kontrast alt klasöründe istersek çoklu karşılaştırma düzeltmesi yapılmamış belirginlik (significance, -log10(pvalue)) haritası olan <strong>sig.mgz</strong> dosyasını kullanabiliriz. Arkaplanına ise <strong>fsaverage</strong> şablonunu koyuyoruz.<pre><code>freeview -f $SUBJECTS_DIR/fsaverage/surf/lh.inflated:annot=aparc.annot:annot_outline=1:overlay=lh.HastaKontrolYasIQ.glmdir/grup.fark/sig.mgh:overlay_threshold=4,5 \
+-viewport 3d \
+-layout 1</code></pre></p>
 							<hr width="100%" size="5" noshade>
 							<h2>Permütasyon Kullanarak Küme Seviyesinde Çoklu Karşılaştırma Düzeltmesi (mri_glmfit-sim):</h2>
-							Önceki aşamada GLM çözülürken eklediğimiz son parametre olan <strong>--eres-save</strong>
+							Önceki aşamada GLM çözülürken eklediğimiz son parametre olan <strong>--eres-save</strong> permütasyon için gerekli bir parametre.
 						</div>
 					</section>
 
